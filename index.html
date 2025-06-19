@@ -1,298 +1,323 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Todo sobre el Phishing - Información y Prevención</title>
+  <title>World Tourist Destinations - History, Culture & Highlights</title>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap"
+    rel="stylesheet"
+  />
   <style>
-    body {
-      font-family: "Georgia", serif;
-      background-color: #f9f9f9;
-      color: #1c1c1c;
+    /* Reset and base */
+    * {
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
     }
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #0f172a;
+      color: #f8fafc;
+      line-height: 1.6;
+      min-height: 100vh;
+      padding: 24px 16px;
+      scroll-behavior: smooth;
+    }
+    a {
+      color: #10b981;
+      text-decoration: none;
+    }
+    a:hover,
+    a:focus {
+      text-decoration: underline;
+    }
+
     header {
-      background-color: #002244;
-      color: white;
-      padding: 40px 20px;
+      max-width: 900px;
+      margin: 0 auto 48px;
       text-align: center;
     }
     header h1 {
-      font-size: 2.7rem;
-      margin-bottom: 10px;
+      font-weight: 800;
+      font-size: 2.8rem;
+      letter-spacing: 1.2px;
+      margin-bottom: 8px;
+      color: #22c55e;
     }
-    .author {
-      font-size: 1rem;
-      font-style: italic;
-    }
-    nav {
-      background-color: #dcdcdc;
-      padding: 12px;
-      text-align: center;
-      font-family: "Georgia", serif;
-    }
-    nav a {
-      color: #002244;
-      text-decoration: none;
-      font-weight: bold;
-      margin: 0 14px;
-      font-size: 1.05rem;
-    }
-    nav a:hover {
-      text-decoration: underline;
-    }
-    main {
-      max-width: 1100px;
-      margin: auto;
-      padding: 30px;
+    header p {
+      color: #94a3b8;
       font-size: 1.1rem;
-      line-height: 1.6;
+      max-width: 600px;
+      margin: 0 auto;
     }
-    section {
-      margin-bottom: 60px;
+
+    main {
+      max-width: 960px;
+      margin: 0 auto;
+      display: grid;
+      gap: 48px;
     }
-    h2 {
-      color: #002244;
-      border-bottom: 2px solid #aaa;
-      padding-bottom: 6px;
-      font-size: 1.6rem;
+
+    section.destination-card {
+      background: rgba(255 255 255 / 0.05);
+      border-radius: 16px;
+      padding: 24px 32px;
+      box-shadow:
+        0 4px 10px rgb(16 185 129 / 0.2),
+        0 0 12px rgb(16 185 129 / 0.3);
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
     }
-    .content-box {
-      background-color: #f2f2f2;
-      padding: 20px;
-      border-left: 6px solid #002244;
-      margin: 15px 0;
+    section.destination-card.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
+    section.destination-card h2 {
+      color: #22c55e;
+      font-weight: 700;
+      font-size: 2rem;
+      margin-bottom: 12px;
+    }
+    section.destination-card h3 {
+      font-weight: 600;
+      font-size: 1.25rem;
+      margin-bottom: 8px;
+      color: #a7f3d0;
+    }
+    section.destination-card img {
+      width: 100%;
+      max-height: 300px;
+      object-fit: cover;
+      border-radius: 12px;
+      box-shadow: 0 6px 12px rgb(16 185 129 / 0.25);
+    }
+    section.destination-card p,
+    section.destination-card ul {
+      font-size: 1rem;
+      color: #d1d5db;
+    }
+    section.destination-card ul {
+      padding-left: 20px;
+      list-style-type: disc;
+    }
+    section.destination-card ul li {
+      margin-bottom: 8px;
+      max-width: 600px;
+    }
+
+    /* Responsive */
+    @media (min-width: 768px) {
+      main {
+        grid-template-columns: repeat(auto-fit, minmax(440px, 1fr));
+      }
+      section.destination-card {
+        flex-direction: column;
+        padding: 28px 36px;
+      }
+    }
+    @media (max-width: 767px) {
+      section.destination-card {
+        padding: 20px 20px;
+      }
+    }
+
+    /* Animations */
+    @media (prefers-reduced-motion: no-preference) {
+      section.destination-card {
+        will-change: opacity, transform;
+      }
+    }
+
     footer {
-      background-color: #002244;
-      color: white;
+      margin: 64px auto 24px;
+      max-width: 900px;
       text-align: center;
-      padding: 20px;
-      font-size: 0.95rem;
-    }
-    .back-to-top {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: #002244;
-      color: white;
-      padding: 10px 15px;
-      text-decoration: none;
-      border-radius: 8px;
-      display: none;
-    }
-    .quiz-option {
-      background: #e8e8e8;
-      padding: 10px;
-      margin: 6px 0;
-      border-radius: 5px;
-      cursor: pointer;
-      user-select: none;
-    }
-    .quiz-option:hover {
-      background-color: #ddd;
+      font-size: 0.9rem;
+      color: #64748b;
     }
   </style>
 </head>
-<body id="top">
+<body>
   <header>
-    <h1>Todo sobre el Phishing</h1>
-    <div class="author">Hecho por Juan Martínez - Colegio Militar</div>
+    <h1>World Tourist Destinations</h1>
+    <p>
+      Explore the rich history, vibrant culture, and finest highlights of
+      five iconic destinations across the globe.
+    </p>
   </header>
-
-  <nav>
-    <a href="#introduccion">Introducción</a>
-    <a href="#tipos">Tipos</a>
-    <a href="#ejemplos">Ejemplos</a>
-    <a href="#prevencion">Prevención</a>
-    <a href="#casos">Casos Reales</a>
-    <a href="#legislacion">Legislación</a>
-    <a href="#quiz">Quiz</a>
-    <a href="#fuentes">Fuentes</a>
-  </nav>
-
   <main>
-    <section id="introduccion">
-      <h2>Introducción</h2>
-      <div class="content-box">
-        <p>El phishing es una técnica de ingeniería social utilizada por ciberdelincuentes para engañar a las personas y obtener información confidencial como contraseñas, datos bancarios, números de tarjetas de crédito, entre otros.</p>
-        <p>Este tipo de ataque suele llevarse a cabo mediante el envío de correos electrónicos, mensajes de texto o llamadas telefónicas que aparentan provenir de entidades legítimas. El objetivo es manipular al receptor para que revele sus datos personales voluntariamente.</p>
-        <p>El phishing representa una de las amenazas más frecuentes en internet, afectando tanto a usuarios individuales como a organizaciones públicas y privadas en todo el mundo.</p>
-      </div>
+    <!-- Paris -->
+    <section class="destination-card" id="paris">
+      <h2>Paris, France</h2>
+      <img
+        src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/c7f4cfba-6fbe-4ee2-b77c-c481fabe23b3.png"
+        alt="Iconic Eiffel Tower at sunset in Paris, France, surrounded by cityscape with warm ambient light"
+      />
+      <h3>Historical Context</h3>
+      <p>
+        Paris, famously called "The City of Light," has been a major center of
+        finance, commerce, science, and the arts since the 17th century. Rich
+        in history, it was a focal point during the Renaissance, the French
+        Revolution, and played pivotal roles in both World Wars.
+      </p>
+      <h3>Culture</h3>
+      <p>
+        Known for its enduring influence on art and fashion, Paris is home to
+        world-renowned museums like the Louvre and Orsay, exquisite cuisine,
+        and a vibrant café culture. The city's romantic streets and landmarks
+        attract millions annually.
+      </p>
+      <h3>Highlights</h3>
+      <ul>
+        <li>The Eiffel Tower and Champs-Élysées</li>
+        <li>World-class museums and galleries</li>
+        <li>Historic neighborhoods like Montmartre & Le Marais</li>
+        <li>Parisian cuisine and Michelin-starred dining</li>
+      </ul>
     </section>
 
-    <section id="tipos">
-      <h2>Tipos de Phishing</h2>
-      <div class="content-box">
-        <ul>
-          <li><strong>Phishing tradicional:</strong> correos masivos enviados simulando ser de empresas reconocidas.</li>
-          <li><strong>Spear Phishing:</strong> ataques dirigidos a individuos específicos, utilizando datos personales para parecer legítimos.</li>
-          <li><strong>Whaling:</strong> ataque dirigido a altos ejecutivos o personas con acceso privilegiado.</li>
-          <li><strong>Smishing:</strong> phishing mediante mensajes SMS falsos.</li>
-          <li><strong>Vishing:</strong> phishing realizado por llamadas telefónicas.</li>
-          <li><strong>Pharming:</strong> manipulación de servidores DNS para redirigir al usuario a sitios falsificados.</li>
-        </ul>
-      </div>
+    <!-- Kyoto -->
+    <section class="destination-card" id="kyoto">
+      <h2>Kyoto, Japan</h2>
+      <img
+        src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/f1c50679-d915-4da7-8b56-a381a46a7a03.png"
+        alt="Golden Pavilion Kinkaku-ji reflected in a tranquil pond surrounded by lush greenery in Kyoto, Japan"
+      />
+      <h3>Historical Context</h3>
+      <p>
+        Kyoto served as Japan's capital and emperor's residence for over a
+        millennium from 794 to 1868. The city retains its historical charm with
+        over 1,600 Buddhist temples, Shinto shrines, and traditional wooden
+        machiya houses.
+      </p>
+      <h3>Culture</h3>
+      <p>
+        Kyoto is the heart of traditional Japanese culture — famed for tea
+        ceremonies, geisha districts, ikebana flower arrangement, and stunning
+        seasonal festivals. It remains a bastion of craftsmanship and spirituality.
+      </p>
+      <h3>Highlights</h3>
+      <ul>
+        <li>The Golden Pavilion (Kinkaku-ji) and Fushimi Inari Shrine</li>
+        <li>Historic Gion district and traditional teahouses</li>
+        <li>Stunning cherry blossoms and autumn foliage</li>
+        <li>Traditional Japanese gardens and Zen temples</li>
+      </ul>
     </section>
 
-    <section id="ejemplos">
-      <h2>Ejemplos Comunes</h2>
-      <div class="content-box">
-        <p><strong>Correo bancario falso:</strong> El usuario recibe un email indicando que debe verificar su cuenta ingresando a un enlace sospechoso.</p>
-        <p><strong>Mensaje de paquete:</strong> Un SMS informa de un paquete detenido, solicitando que el usuario haga clic en un enlace para seguimiento.</p>
-        <p><strong>Suplantación de identidad de un compañero:</strong> Recibes un correo de tu "jefe" solicitando una transferencia urgente.</p>
-      </div>
+    <!-- Rio de Janeiro -->
+    <section class="destination-card" id="rio">
+      <h2>Rio de Janeiro, Brazil</h2>
+      <img
+        src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/49ef3b60-466c-4c9e-9cee-86658eb91080.png"
+        alt="Christ the Redeemer statue overlooking the city and beaches of Rio de Janeiro, Brazil on a sunny day"
+      />
+      <h3>Historical Context</h3>
+      <p>
+        Founded in 1565, Rio was Brazil's capital for nearly two centuries and
+        has grown into a bustling metropolis. It reflects a mélange of
+        indigenous, Portuguese, African, and immigrant influences shaping its
+        history and society.
+      </p>
+      <h3>Culture</h3>
+      <p>
+        Rio is famed for its lively Carnival festival, samba music and dance,
+        vibrant street art, and passionate sports culture. The city's beach
+        lifestyle and natural backdrops blend urban energy with breathtaking
+        nature.
+      </p>
+      <h3>Highlights</h3>
+      <ul>
+        <li>Christ the Redeemer statue and Sugarloaf Mountain</li>
+        <li>Copacabana and Ipanema beaches</li>
+        <li>World-famous Carnival celebrations</li>
+        <li>Thriving samba clubs and street art scenes</li>
+      </ul>
     </section>
 
-    <section id="prevencion">
-      <h2>Prevención</h2>
-      <div class="content-box">
-        <ul>
-          <li>Evita hacer clic en enlaces sospechosos o desconocidos.</li>
-          <li>Verifica siempre la dirección del remitente y del sitio web.</li>
-          <li>Habilita la autenticación de dos factores (2FA).</li>
-          <li>Mantén actualizado tu software y antivirus.</li>
-          <li>Educa a familiares y colegas sobre estas prácticas.</li>
-        </ul>
-      </div>
+    <!-- New York -->
+    <section class="destination-card" id="newyork">
+      <h2>New York, USA</h2>
+      <img
+        src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/fa4721a5-1add-45bb-abc1-cf77a91ddf03.png"
+        alt="The Statue of Liberty with Manhattan skyline in the background on a clear day in New York City, USA"
+      />
+      <h3>Historical Context</h3>
+      <p>
+        Founded in 1624 by Dutch settlers, New York became a gateway for
+        millions of immigrants entering the United States. It evolved into the
+        largest U.S. city and a global center for finance, culture, and media.
+      </p>
+      <h3>Culture</h3>
+      <p>
+        Known as "The City That Never Sleeps," New York is a melting pot of
+        diverse cultures, iconic arts scenes (Broadway, museums), and culinary
+        innovation. Its boroughs offer unique urban experiences around the clock.
+      </p>
+      <h3>Highlights</h3>
+      <ul>
+        <li>Statue of Liberty and Ellis Island</li>
+        <li>Broadway theaters and Central Park</li>
+        <li>World-class museums like MoMA and MET</li>
+        <li>Distinct neighborhoods like Harlem, Brooklyn, and Chinatown</li>
+      </ul>
     </section>
 
-    <section id="casos">
-      <h2>Casos Reales</h2>
-      <div class="content-box">
-        <p>Uno de los ataques más conocidos fue el dirigido a empleados de Google y Facebook, donde los atacantes lograron robar más de 100 millones de dólares mediante correos falsos.</p>
-        <p>En América Latina, ha habido múltiples ataques a bancos nacionales donde usuarios ingresaron sus credenciales en sitios clonados y perdieron acceso a sus cuentas bancarias.</p>
-      </div>
-    </section>
-
-    <section id="legislacion">
-      <h2>Legislación en El Salvador</h2>
-      <div class="content-box">
-        <p>En El Salvador, el phishing es considerado un delito informático contemplado en el Código Penal. Las autoridades como la Policía Nacional Civil (PNC) y la Fiscalía General de la República (FGR) investigan y procesan este tipo de delitos.</p>
-        <p>Además, la Ley Especial contra los Delitos Informáticos y Conexos establece sanciones para quienes accedan de forma indebida a sistemas informáticos, incluyendo mediante técnicas de phishing.</p>
-        <p>La Unidad de Delitos Informáticos de la PNC es la encargada de recibir denuncias y actuar en conjunto con organismos internacionales para combatir estas amenazas.</p>
-      </div>
-    </section>
-
-    <section id="quiz">
-      <h2>Quiz: Pon a prueba tus conocimientos</h2>
-      <div class="content-box">
-        <div class="quiz-pregunta">
-          <p><strong>1. ¿Qué es el phishing?</strong></p>
-          <div class="quiz-option" onclick="responder(this, true)">Una técnica para engañar y obtener información confidencial</div>
-          <div class="quiz-option" onclick="responder(this, false)">Un software antivirus</div>
-          <div class="quiz-option" onclick="responder(this, false)">Un tipo de hardware</div>
-        </div>
-
-        <div class="quiz-pregunta">
-          <p><strong>2. ¿Qué significa "Spear Phishing"?</strong></p>
-          <div class="quiz-option" onclick="responder(this, true)">Ataque dirigido a una persona específica</div>
-          <div class="quiz-option" onclick="responder(this, false)">Ataque masivo indiscriminado</div>
-          <div class="quiz-option" onclick="responder(this, false)">Un tipo de firewall</div>
-        </div>
-
-        <div class="quiz-pregunta">
-          <p><strong>3. ¿Cuál es una buena práctica para evitar el phishing?</strong></p>
-          <div class="quiz-option" onclick="responder(this, true)">No hacer clic en enlaces sospechosos</div>
-          <div class="quiz-option" onclick="responder(this, false)">Compartir contraseñas con amigos</div>
-          <div class="quiz-option" onclick="responder(this, false)">Usar la misma contraseña en todos lados</div>
-        </div>
-
-        <div class="quiz-pregunta">
-          <p><strong>4. ¿Qué tipo de phishing se realiza mediante llamadas telefónicas?</strong></p>
-          <div class="quiz-option" onclick="responder(this, true)">Vishing</div>
-          <div class="quiz-option" onclick="responder(this, false)">Smishing</div>
-          <div class="quiz-option" onclick="responder(this, false)">Pharming</div>
-        </div>
-
-        <div class="quiz-pregunta">
-          <p><strong>5. ¿Qué autoridad en El Salvador investiga los delitos de phishing?</strong></p>
-          <div class="quiz-option" onclick="responder(this, true)">Policía Nacional Civil (PNC)</div>
-          <div class="quiz-option" onclick="responder(this, false)">Ministerio de Turismo</div>
-          <div class="quiz-option" onclick="responder(this, false)">Banco Central</div>
-        </div>
-
-        <!-- Nuevas preguntas -->
-        <div class="quiz-pregunta">
-          <p><strong>6. ¿Qué es el Smishing?</strong></p>
-          <div class="quiz-option" onclick="responder(this, true)">Phishing mediante mensajes SMS</div>
-          <div class="quiz-option" onclick="responder(this, false)">Phishing por correo electrónico</div>
-          <div class="quiz-option" onclick="responder(this, false)">Phishing por llamada telefónica</div>
-        </div>
-
-        <div class="quiz-pregunta">
-          <p><strong>7. ¿Qué técnica consiste en manipular servidores DNS para redirigir a sitios falsos?</strong></p>
-          <div class="quiz-option" onclick="responder(this, true)">Pharming</div>
-          <div class="quiz-option" onclick="responder(this, false)">Spear Phishing</div>
-          <div class="quiz-option" onclick="responder(this, false)">Whaling</div>
-        </div>
-
-        <div class="quiz-pregunta">
-          <p><strong>8. ¿Cuál es un síntoma común de un correo phishing?</strong></p>
-          <div class="quiz-option" onclick="responder(this, true)">Solicita información personal urgente</div>
-          <div class="quiz-option" onclick="responder(this, false)">Envía un reporte legítimo</div>
-          <div class="quiz-option" onclick="responder(this, false)">Nunca contiene enlaces</div>
-        </div>
-
-        <div class="quiz-pregunta">
-          <p><strong>9. ¿Qué medida de seguridad ayuda a proteger cuentas aunque la contraseña sea robada?</strong></p>
-          <div class="quiz-option" onclick="responder(this, true)">Autenticación de dos factores (2FA)</div>
-          <div class="quiz-option" onclick="responder(this, false)">Usar contraseñas simples</div>
-          <div class="quiz-option" onclick="responder(this, false)">Desactivar antivirus</div>
-        </div>
-
-        <div class="quiz-pregunta">
-          <p><strong>10. ¿Qué debe hacer un usuario si sospecha haber recibido un correo phishing?</strong></p>
-          <div class="quiz-option" onclick="responder(this, true)">No responder y reportarlo a su proveedor o empresa</div>
-          <div class="quiz-option" onclick="responder(this, false)">Abrir todos los enlaces para verificar</div>
-          <div class="quiz-option" onclick="responder(this, false)">Compartirlo con amigos para preguntarles</div>
-        </div>
-      </div>
-    </section>
-
-    <section id="fuentes">
-      <h2>Fuentes</h2>
-      <div class="content-box">
-        <ul>
-          <li><a href="https://www.incibe.es" target="_blank" rel="noopener noreferrer">https://www.incibe.es</a></li>
-          <li><a href="https://www.welivesecurity.com" target="_blank" rel="noopener noreferrer">https://www.welivesecurity.com</a></li>
-          <li><a href="https://www.interpol.int" target="_blank" rel="noopener noreferrer">https://www.interpol.int</a></li>
-          <li><a href="https://www.fgr.gob.sv" target="_blank" rel="noopener noreferrer">https://www.fgr.gob.sv</a></li>
-        </ul>
-      </div>
+    <!-- Cairo -->
+    <section class="destination-card" id="cairo">
+      <h2>Cairo, Egypt</h2>
+      <img
+        src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/6174926f-8c1c-4976-8d19-b94f6095476c.png"
+        alt="The Great Pyramids of Giza under a bright blue sky near Cairo, Egypt with a camel in the foreground"
+      />
+      <h3>Historical Context</h3>
+      <p>
+        Cairo, founded in the 10th century, is one of the oldest capitals in the
+        Arab world. It sits adjacent to the ancient pyramids and reflects a
+        history stretching back to the powerful pharaoh dynasties of Egypt.
+      </p>
+      <h3>Culture</h3>
+      <p>
+        The city pulses with a rich Islamic, Coptic, and Pharaonic heritage.
+        Cairo’s bazaars, mosques, museums, and music scene celebrate millennia
+        of civilization blending tradition with modern life.
+      </p>
+      <h3>Highlights</h3>
+      <ul>
+        <li>The Great Pyramids and Sphinx of Giza</li>
+        <li>The Egyptian Museum and Khan El Khalili bazaar</li>
+        <li>Historic Islamic architecture and mosques</li>
+        <li>Luxor temples and Nile river cruises nearby</li>
+      </ul>
     </section>
   </main>
 
   <footer>
-    <p>Juan Martínez - Colegio Militar &copy; 2025</p>
+    &copy; 2024 World Tourist Destinations. All rights reserved.
   </footer>
 
-  <a href="#top" id="backToTop" class="back-to-top">Volver arriba</a>
-
   <script>
-    function responder(el, correcto) {
-      // Check if the question already answered
-      const pregunta = el.closest('.quiz-pregunta');
-      if (pregunta.getAttribute('data-answered') === 'true') {
-        return; // no permitir responder otra vez
-      }
-      if (correcto) {
-        el.style.backgroundColor = '#ccebc5';
-        el.innerText += ' ✅ Correcto';
-      } else {
-        el.style.backgroundColor = '#fddde6';
-        el.innerText += ' ❌ Incorrecto';
-      }
-      pregunta.setAttribute('data-answered', 'true');
-      const opciones = pregunta.querySelectorAll('.quiz-option');
-      opciones.forEach(opt => opt.onclick = null);
+    // Intersection Observer to reveal cards on scroll
+    const cards = document.querySelectorAll('.destination-card');
+    const options = {
+      threshold: 0.15,
+    };
+    function revealCard(entries, observer) {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
     }
-
-    const back = document.getElementById('backToTop');
-    window.addEventListener('scroll', () => {
-      back.style.display = window.scrollY > 200 ? 'block' : 'none';
-    });
+    const observer = new IntersectionObserver(revealCard, options);
+    cards.forEach((card) => observer.observe(card));
   </script>
 </body>
 </html>
+
